@@ -1,0 +1,86 @@
+from random import*
+from time import sleep
+
+
+First_Player_Score = 0 
+Second_Player_Score = 0
+Dice_1 = [1, 2, 3, 4, 5, 6]
+Dice_2 = [1, 2, 3, 4, 5, 6]
+
+def Toss_Dice():
+    '''
+    This is the dice toss done by only the first player
+    '''
+    sleep(2)
+    print('\nPľease enter T to toss your dice: ', end=' ')
+    Player_Toss = input()    
+    control = False
+    while not control:         
+        try:                      
+            Player_Toss == 't'
+            shuffle(Dice_1)
+            shuffle(Dice_2)
+            control = False  
+                                                         
+        except ValueError:
+            print('Your Toss is not correct!')
+    First_Num= choice(Dice_1)
+    Second_Num = choice(Dice_2)       
+        
+    return First_Num + Second_Num
+
+
+def mToss_Dice():
+    '''
+    This is the toss done by only the second player.
+    '''
+    sleep(1)
+    print(Second_Player_Name,'your dices have also been tossed!')
+    shuffle(Dice_1)
+    shuffle(Dice_2)
+    First_Num= choice(Dice_1)
+    Second_Num = choice(Dice_2)
+        
+    return First_Num + Second_Num
+
+
+def main():
+    print('\t•••Welcome to the Dice Game•••')
+    print('Please provide your User Id: ', end='')
+    First_Player_Name = input()
+    Second_Player_Names = ['Ukeme', 'Peter', 'Oku', 'Mfon', 'Kelvin', 'Peace', 'Lucy', 'Emem', 'Charly','Precy']
+    
+    global Second_Player_Name
+    Second_Player_Name = choice(Second_Player_Names)
+    print('\n{}, the game has started...\nAnd you are playing against {}.' .format(First_Player_Name,Second_Player_Name))
+    
+    On = 'y'
+    while On == 'y' or On == 'Y' :             
+        First_Player_Score = Toss_Dice()
+        Second_Player_Score = mToss_Dice()
+        
+        print('\nCalculating total...')
+        sleep(3)
+        print(First_Player_Name,"'s score is ", First_Player_Score)
+        print(Second_Player_Name,"'s score is ", Second_Player_Score)
+        Score_A = First_Player_Score - Second_Player_Score
+        Score_B = Second_Player_Score - First_Player_Score
+        sleep(0.5)
+        
+        if First_Player_Score > Second_Player_Score:
+            print('\n{} you won {} with a difference of {}' .format(First_Player_Name, Second_Player_Name, Score_A))
+    
+    
+        if Second_Player_Score  > First_Player_Score:
+            print('\n{}, {} defeated you with {} point(s)' .format(First_Player_Name, Second_Player_Name,Score_B))
+            
+        
+        if First_Player_Score  == Second_Player_Score:
+            print('\nWow! the both of you just had a tie') 
+        print('\nTo repeat Enter Y or Enter N to stop: ', end='')
+        On = input()
+        
+        
+if __name__ == '__main__':
+    main()
+
